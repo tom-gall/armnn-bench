@@ -9,7 +9,9 @@ tflite_model_file = os.path.join(model_dir, "inception_v3_quant.tflite")
 tflite_model_buf = open(tflite_model_file, "rb").read()
 
 dtype="uint8"
-image_data = load_test_image(dtype)
+height=299
+width=299
+image_data = load_test_image(dtype,width,height)
 
 parser = ann.ITfLiteParser()
 network = parser.CreateNetworkFromBinaryFile(tflite_model_file)
@@ -43,4 +45,4 @@ for i in range(0,repeat):
 
 
 out_tensor = ann.workload_tensors_to_ndarray(output_tensors)[0][0]
-print("armnn MobileNet v2 quant %-19s (%s)" % ("%.2f ms" % np.mean(numpy_time), "%.2f ms" % np.std(numpy_time)))
+print("armnn Inception v3 quant %-19s (%s)" % ("%.2f ms" % np.mean(numpy_time), "%.2f ms" % np.std(numpy_time)))

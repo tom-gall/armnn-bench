@@ -9,7 +9,9 @@ tflite_model_file = os.path.join(model_dir, "inception_v3.tflite")
 tflite_model_buf = open(tflite_model_file, "rb").read()
 
 dtype="float32"
-image_data = load_test_image(dtype)
+height=299
+width=299
+image_data = load_test_image(dtype, height, width)
 
 parser = ann.ITfLiteParser()
 network = parser.CreateNetworkFromBinaryFile(tflite_model_file)
